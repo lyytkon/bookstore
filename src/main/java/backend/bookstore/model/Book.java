@@ -1,6 +1,5 @@
 package backend.bookstore.model;
 
-
 import jakarta.persistence.*;
 
 @Entity
@@ -14,10 +13,13 @@ public class Book {
     private String author;
     private String isbn;
 
-    // Älä käytä 'year' - se on varattu sana joissain kannoissa
     private int publicationYear;
 
     private double price;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     public Book() {}
 
@@ -27,6 +29,11 @@ public class Book {
         this.isbn = isbn;
         this.publicationYear = publicationYear;
         this.price = price;
+    }
+
+    public Book(String title, String author, String isbn, int publicationYear, double price, Category category) {
+        this(title, author, isbn, publicationYear, price);
+        this.category = category;
     }
 
     // Getterit ja setterit
@@ -47,4 +54,7 @@ public class Book {
 
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
+
+    public Category getCategory() { return category; }
+    public void setCategory(Category category) { this.category = category; }
 }

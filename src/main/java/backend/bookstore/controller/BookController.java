@@ -2,6 +2,7 @@ package backend.bookstore.controller;
 
 import backend.bookstore.model.Book;
 import backend.bookstore.model.BookRepository;
+import backend.bookstore.model.CategoryRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,9 +11,11 @@ import org.springframework.web.bind.annotation.*;
 public class BookController {
 
     private final BookRepository repo;
+    private final CategoryRepository categoryRepo;
 
-    public BookController(BookRepository repo) {
+    public BookController(BookRepository repo, CategoryRepository categoryRepo) {
         this.repo = repo;
+        this.categoryRepo = categoryRepo;
     }
 
     @GetMapping("/")
@@ -29,6 +32,7 @@ public class BookController {
     @GetMapping("/add")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", categoryRepo.findAll());
         return "addbook";
     }
 
@@ -48,6 +52,7 @@ public class BookController {
     public String editBook(@PathVariable("id") Long id, Model model) {
         Book book = repo.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid book id: " + id));
         model.addAttribute("book", book);
+        model.addAttribute("categories", categoryRepo.findAll());
         return "editbook";
     }
 }

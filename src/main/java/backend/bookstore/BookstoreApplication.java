@@ -2,6 +2,8 @@ package backend.bookstore;
 
 import backend.bookstore.model.Book;
 import backend.bookstore.model.BookRepository;
+import backend.bookstore.model.Category;
+import backend.bookstore.model.CategoryRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,11 +17,16 @@ public class BookstoreApplication {
     }
 
     @Bean
-    CommandLineRunner initData(BookRepository bookRepository) {
+    CommandLineRunner initData(BookRepository bookRepository, CategoryRepository categoryRepository) {
         return args -> {
-            bookRepository.save(new Book("Clean Code", "Robert C. Martin", "9780132350884", 2008, 37.90));
-            bookRepository.save(new Book("Effective Java", "Joshua Bloch", "9780134685991", 2018, 42.50));
-            bookRepository.save(new Book("Refactoring", "Martin Fowler", "9780201485677", 1999, 39.00));
+            Category classics = categoryRepository.save(new Category("Classics"));
+            Category programming = categoryRepository.save(new Category("Programming"));
+            Category scifi = categoryRepository.save(new Category("Sci-Fi"));
+
+            bookRepository.save(new Book("Clean Code", "Robert C. Martin", "9780132350884", 2008, 37.90, programming));
+            bookRepository.save(new Book("Effective Java", "Joshua Bloch", "9780134685991", 2018, 42.50, programming));
+            bookRepository.save(new Book("Animal Farm", "George Orwell", "9780451526342", 1945, 9.90, classics));
+            bookRepository.save(new Book("Dune", "Frank Herbert", "9780441013593", 1965, 14.50, scifi));
         };
     }
 }

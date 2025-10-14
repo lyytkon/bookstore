@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Bookstore - Books</title>
-    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body class="container py-4">
 <h1>Books</h1>
@@ -18,7 +18,8 @@
         <th>Title</th>
         <th>Author</th>
         <th>ISBN</th>
-        <th>Publication Year</th>
+        <th>Year</th>
+        <th>Category</th>
         <th>Price (€)</th>
         <th>Actions</th>
     </tr>
@@ -29,8 +30,10 @@
         <td th:text="${book.author}">Author</td>
         <td th:text="${book.isbn}">ISBN</td>
         <td th:text="${book.publicationYear}">Year</td>
+        <td th:text="${book.category != null ? book.category.name : '-'}">-</td>
         <td th:text="${#numbers.formatDecimal(book.price, 1, 'COMMA', 2, 'POINT')}">0.00</td>
         <td>
+            <a class="btn btn-primary btn-sm" th:href="@{/edit/{id}(id=${book.id})}">Edit</a>
             <a class="btn btn-danger btn-sm" th:href="@{/delete/{id}(id=${book.id})}"
                onclick="return confirm('Delete this book?');">Delete</a>
         </td>
