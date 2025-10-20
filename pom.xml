@@ -51,7 +51,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-rest</artifactId>
     </dependency>
-    <!-- Optional: browser UI for exploring Spring Data REST endpoints -->
+    <!-- Optional: HAL Explorer UI for Spring Data REST -->
     <dependency>
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-rest-hal-explorer</artifactId>
