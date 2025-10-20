@@ -38,6 +38,12 @@ public class BookController {
 
     @PostMapping("/save")
     public String saveBook(@ModelAttribute Book book) {
+        if (book.getCategory() != null && book.getCategory().getId() != null) {
+            var cat = categoryRepo.findById(book.getCategory().getId()).orElse(null);
+            book.setCategory(cat);
+        } else {
+            book.setCategory(null);
+        }
         repo.save(book);
         return "redirect:/books";
     }

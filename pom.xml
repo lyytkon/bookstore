@@ -46,6 +46,17 @@
       <scope>runtime</scope>
     </dependency>
 
+    <!-- REST (Chapter 5) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-rest</artifactId>
+    </dependency>
+    <!-- Optional: browser UI for exploring Spring Data REST endpoints -->
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-rest-hal-explorer</artifactId>
+    </dependency>
+
     <!-- Tests -->
     <dependency>
       <groupId>org.springframework.boot</groupId>

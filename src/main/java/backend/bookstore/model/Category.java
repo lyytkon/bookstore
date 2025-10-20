@@ -1,5 +1,6 @@
 package backend.bookstore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ public class Category {
 
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Book> books = new ArrayList<>();
 
