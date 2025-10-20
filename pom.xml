@@ -34,6 +34,11 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
     </dependency>
+    <!-- Thymeleaf + Spring Security -dialaekti (sec:* attribuutit) -->
+    <dependency>
+      <groupId>org.thymeleaf.extras</groupId>
+      <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+    </dependency>
 
     <!-- JPA + H2 -->
     <dependency>
@@ -46,15 +51,20 @@
       <scope>runtime</scope>
     </dependency>
 
-    <!-- REST (Chapter 5) -->
+    <!-- REST -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-rest</artifactId>
     </dependency>
-    <!-- Optional: HAL Explorer UI for Spring Data REST -->
     <dependency>
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-rest-hal-explorer</artifactId>
+    </dependency>
+
+    <!-- SECURITY (Chapter 6) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
 
     <!-- Tests -->

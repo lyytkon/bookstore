@@ -3,6 +3,7 @@ package backend.bookstore.controller;
 import backend.bookstore.model.Book;
 import backend.bookstore.model.BookRepository;
 import backend.bookstore.model.CategoryRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,8 +40,7 @@ public class BookController {
     @PostMapping("/save")
     public String saveBook(@ModelAttribute Book book) {
         if (book.getCategory() != null && book.getCategory().getId() != null) {
-            var cat = categoryRepo.findById(book.getCategory().getId()).orElse(null);
-            book.setCategory(cat);
+            book.setCategory(categoryRepo.findById(book.getCategory().getId()).orElse(null));
         } else {
             book.setCategory(null);
         }
@@ -48,6 +48,7 @@ public class BookController {
         return "redirect:/books";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/delete/{id}")
     public String deleteBook(@PathVariable("id") Long id) {
         repo.deleteById(id);
@@ -60,5 +61,11 @@ public class BookController {
         model.addAttribute("book", book);
         model.addAttribute("categories", categoryRepo.findAll());
         return "editbook";
+    }
+
+    // Login-sivu
+    @GetMapping("/login")
+    public String login() {
+        return "login";
     }
 }
